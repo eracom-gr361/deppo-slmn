@@ -5,17 +5,18 @@
 **/
 
 
-add_action( 'wp_enqueue_scripts', 'deppo_slmn_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'deppo_slmn_enqueue_styles', 11 );
 
 function deppo_slmn_enqueue_styles() {
 
  wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 
+ // corrige un bug de Deppo: 
+ // le chemin du CSS deppo-font-enqueue est faux, il pointe vers le style enfant.
 
- // corrige un bug de Deppo: deppo-font-enqueue
+ wp_dequeue_style( 'deppo-font-enqueue' );
 
  wp_enqueue_style( 'hkgrotesk-style', get_template_directory_uri() . '/assets/fonts/hk-grotesk/stylesheet.css' );
-
 
 }
 
