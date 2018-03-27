@@ -11,13 +11,6 @@ function deppo_slmn_enqueue_styles() {
 
  wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 
- // corrige un bug de Deppo: 
- // le chemin du CSS deppo-font-enqueue est faux, il pointe vers le style enfant.
-
- wp_dequeue_style( 'deppo-font-enqueue' );
-
- wp_enqueue_style( 'hkgrotesk-style', get_template_directory_uri() . '/assets/fonts/hk-grotesk/stylesheet.css' );
-
 }
 
 
