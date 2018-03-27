@@ -11,6 +11,12 @@ function deppo_slmn_enqueue_styles() {
 
  wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
 
+
+ // corrige un bug de Deppo: deppo-font-enqueue
+
+ wp_enqueue_style( 'hkgrotesk-style', get_template_directory_uri() . '/assets/fonts/hk-grotesk/stylesheet.css' );
+
+
 }
 
 
@@ -23,23 +29,10 @@ function deppo_slmn_enqueue_styles() {
  *
  * @since  deppo 1.0
  */
+
 function deppo_slmn_slider_featured_image() {
 
-	// vérifier si on a une image ACF:
-
-	if (function_exists('get_field')) {
-
-		$image = get_field('image_accueil');
-		$size = 'full'; // (thumbnail, medium, large, full or custom size)
-
-		if( $image ) {
-
-			echo wp_get_attachment_image( $image['id'], 'full' );
-
-		}
-
-
-	} else if ( has_post_thumbnail() ) :
+	if ( has_post_thumbnail() ) :
 
 		?>
 
@@ -68,7 +61,20 @@ function deppo_slmn_slider_featured_image() {
 					if ( $display_post_nav == 0 ) { ?>
 						<a href="<?php the_permalink(); ?>">
 					<?php }
-						the_post_thumbnail($thumb_size);
+
+						// vérifier si on a une image ACF:
+						$acf_image = get_field('image_accueil');
+
+						if( $acf_image ) {
+
+							echo wp_get_attachment_image( $acf_image['id'], $thumb_size );
+
+						} else { 
+
+							the_post_thumbnail($thumb_size);
+
+						}
+
  					if ( $display_post_nav == 0 ) { ?>
 						</a>
 					<?php } ?>

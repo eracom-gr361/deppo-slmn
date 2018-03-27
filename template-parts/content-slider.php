@@ -17,7 +17,19 @@
 
 	<div class="slider-item-wrapper">
 
-		<?php deppo_slmn_slider_featured_image(); ?>
+		<?php 
+
+		if (function_exists('get_field')) {
+
+			deppo_slmn_slider_featured_image();
+
+		} else {
+
+			deppo_slider_featured_image();
+
+		}
+
+		 ?>
 
 		<header class="entry-header">
 			<?php
